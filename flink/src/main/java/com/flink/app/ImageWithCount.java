@@ -2,6 +2,7 @@ package com.flink.app;
 
 import java.util.Date;
 
+// Class for storing result (occurence of each Image) with URL and window end time to store in the SQL database
 public class ImageWithCount {
     Image image;
     long count;

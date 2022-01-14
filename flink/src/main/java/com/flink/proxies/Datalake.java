@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Base64;
 
+// Class for methods related to creating directories and upload images and receiving URL of the uploaded image.
 public class Datalake {
     DataLakeServiceClient dataLakeServiceClient;
     String containerName;

@@ -5,6 +5,8 @@ import com.flink.app.Image;
 import com.flink.app.ImageWithCount;
 import org.apache.flink.api.common.functions.AggregateFunction;
 
+
+// Aggregator function to check number of times image was received based on its content instead of just the name
 public class CountingAggregator implements AggregateFunction<Image, ImageWithCount, ImageWithCount> {
 
     @Override

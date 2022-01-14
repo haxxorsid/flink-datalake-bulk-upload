@@ -61,11 +61,11 @@ Streams and uploads unique images out of large set for every 30 seconds tumbling
   - Create a data lake and a container inside it (I used Azure Data Lake Gen 2) to store images. Provided YAML template.
 
 
-## Things to improve
+## Things to do
 - Unit test cases
 - Logging
 - Partitioning in Kafka Topic
 - Parallelism in Flink service
 - Managed identity or token based authentication
 - CI/CD Automation
-- Typescript configuration
+- Typescript

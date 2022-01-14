@@ -1,5 +1,6 @@
 package com.flink.app;
 
+// Class for Deserializing each Kafka message to an Object
 public class Image {
     String name;
     String buffer;
