@@ -21,7 +21,11 @@ Streams and uploads unique images out of large set for every 30 seconds tumbling
    - Irrespective of image names, finds unique images by checking content and maintains count. Does this aggregation for every 30 second tumbling window.
    - Uploads these images in Data Lake (Azure Data Lake Gen 2).
    - Inserts these 30 second upload summary (Image name, count, Data lake URL, time) in SQL database.
-
+- Data Lake
+   - Directory structure is in the form of YYYY/MM/DD/HH/MM:SS. So that images are organized based on time.
+   - URL of accessing each uploaded image is saved in SQL database for upload summary in UI.
+- SQL 
+   - Has a table `UploadSummary` which contains FileName, Count, Url for accessing this image, Time. This table is displayed in UI below the form.
 ## How to bootstrap
 ### Modify code
 - React UI
