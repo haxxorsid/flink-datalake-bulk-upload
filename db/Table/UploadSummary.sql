@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[UploadSummary]
+(
+	[UploadSummaryId] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[FileName] VARCHAR(100) NOT NULL,
+	[Count] INT NOT NULL,
+	[Url] VARCHAR(150) NULL,
+	[CreatedAt] DATETIME NOT NULL
+);

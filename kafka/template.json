@@ -1,0 +1,89 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "eventhub_namespace_name": {
+            "type": "String"
+        },
+        "eventhub_name": {
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.EventHub/namespaces",
+            "apiVersion": "2021-11-01",
+            "name": "[parameters('eventhub_namespace_name')]",
+            "location": "East US",
+            "sku": {
+                "name": "Standard",
+                "tier": "Standard",
+                "capacity": 1
+            },
+            "properties": {
+                "disableLocalAuth": false,
+                "zoneRedundant": true,
+                "isAutoInflateEnabled": false,
+                "maximumThroughputUnits": 0,
+                "kafkaEnabled": true
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/AuthorizationRules",
+            "apiVersion": "2021-11-01",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/RootManageSharedAccessKey')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs",
+            "apiVersion": "2021-11-01",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'))]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+            ],
+            "properties": {
+                "messageRetentionInDays": 1,
+                "partitionCount": 2,
+                "status": "Active"
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/networkRuleSets",
+            "apiVersion": "2021-11-01",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/default')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+            ],
+            "properties": {
+                "publicNetworkAccess": "Enabled",
+                "defaultAction": "Allow",
+                "virtualNetworkRules": [],
+                "ipRules": []
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+            "apiVersion": "2021-11-01",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'), '/$Default')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhub_namespace_name'), parameters('eventhub_name'))]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+            ],
+            "properties": {}
+        }
+    ]
+}
