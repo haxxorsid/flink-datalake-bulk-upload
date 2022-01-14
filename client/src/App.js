@@ -12,6 +12,7 @@ function App() {
   const [uploadSummary, setUploadSummary] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Fetch upload summary every 10 seconds
   useEffect(() => {
     fetchSummary();
     const interval = setInterval(() => {
@@ -20,6 +21,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Fetch upload summary
   function fetchSummary() {
     getImageUploadSummary().then(res => {
 
@@ -30,7 +32,9 @@ function App() {
     });
   }
 
+  // Send images to node server
   function onClickHandler() {
+    //check if more than 0 images and there is no size error (more than 300kb)
     if(selectedImages.length > 0 && !(errorMessage)) {
       pushImageUploadEvents(selectedImages).then(res => {
         toast.success('Images sent to Apache kafka');
@@ -42,6 +46,7 @@ function App() {
     }
   }
 
+  // check if size of all images is less than 300kb, else show error
   function checkImages(images) {
     for(var x=0;x< images.length;x++) {
       if(images[x].size/1000 > 300) {

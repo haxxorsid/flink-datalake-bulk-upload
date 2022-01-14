@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Component for upload image form, user can select multiple images at once.
 function ImageForm(props) {
     return (
         <div className="row">

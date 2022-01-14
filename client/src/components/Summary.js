@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Component to show GRID for upload summary
 function Summary(props) {
     return (
         <div>

@@ -70,7 +70,6 @@ public class Datalake {
         long fileSize = data.length;
 
         fileClient.append(is, 0, fileSize);
-        String url = fileClient.getFileUrl();
 
         fileClient.flush(fileSize);
         return fileClient.getFileUrl().replaceAll(".dfs.", ".blob.");
