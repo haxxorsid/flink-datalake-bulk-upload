@@ -1,5 +1,4 @@
 # Bulk Image Upload
-Working Demo: https://image-repo-ui.azurewebsites.net/
 
 Streams and uploads unique images out of large set for every 30 seconds tumbling window using Apache Flink, Apache Kafka (Azure Event Hub), Data Lake (ADLS). Saves upload summary in a Microsoft SQL Database (Azure SQL) for every window and displays it in React UI with a image upload form.
 
